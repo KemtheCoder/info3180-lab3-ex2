@@ -7,7 +7,7 @@ This file creates your application.
 
 from app import app
 from flask import render_template, request, redirect, url_for
-
+import smtplib
 
 ###
 # Routing for your application.
@@ -24,6 +24,20 @@ def about():
     """Render the website's about page."""
     return render_template('about.html', name="Mary Jane")
 
+@app.route('/contact')
+def contact():
+    """Render the website's contact page."""
+    return render_template('contact.html')
+
+
+@app.route('/home',methods=['POST'])
+def redirect_page():
+    return render_template('home.html')
+
+    
+def send_email():
+    """Should gather information from contact form add it here and send email"""
+    return send_email(name, email, subject, message)
 
 ###
 # The functions below should be applicable to all Flask apps.
@@ -53,5 +67,7 @@ def page_not_found(error):
     return render_template('404.html'), 404
 
 
+
+#to start the server
 if __name__ == '__main__':
     app.run(debug=True,host="0.0.0.0",port="8080")
